@@ -2,12 +2,17 @@ package com.spiegelberger.app.ws.restassuredtest;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -69,6 +74,22 @@ class TestCreateUser {
 		
 		String userId = response.jsonPath().get("userId");
 		assertNotNull(userId);
+		assertTrue(userId.length()==30);
+		
+		String bodyString = response.body().asString();
+		try {
+			JSONObject responseBodyJSON = new JSONObject(bodyString);
+			JSONArray addresses = responseBodyJSON.getJSONArray("addresses");
+			String addressId=addresses.getJSONObject(0).getString("addressId");
+			assertNotNull(addressId);
+			assertTrue(addressId.length()==30);
+			
+			assertNotNull(addresses);
+			assertTrue(addresses.length()==2);
+		} catch (JSONException e) {
+			
+			fail(e.getMessage());
+		}
 	}
 
 }
