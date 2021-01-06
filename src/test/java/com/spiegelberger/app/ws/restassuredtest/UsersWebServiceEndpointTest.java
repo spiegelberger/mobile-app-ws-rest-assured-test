@@ -25,6 +25,7 @@ class UsersWebServiceEndpointTest {
 	private final String JSON = "application/json";
 	private static String authorizationHeader;
 	private static String userId;
+	private static List<Map<String, String>> addresses;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -83,7 +84,7 @@ class UsersWebServiceEndpointTest {
 				String userEmail = response.jsonPath().getString("email");
 		        String firstName = response.jsonPath().getString("firstName");
 		        String lastName = response.jsonPath().getString("lastName");
-		        List<Map<String, String>> addresses = response.jsonPath().getList("addresses");
+		        addresses = response.jsonPath().getList("addresses");
 		        String addressId = addresses.get(0).get("addressId");
 				
 				assertNotNull(userPublicId);
@@ -96,4 +97,43 @@ class UsersWebServiceEndpointTest {
 				assertTrue(addressId.length() == 30);
 	}
 */
+	
+	
+	/*
+	 * test UpdateUser()
+	 */
+	@Test
+	final void c() {
+		
+		Map<String, String>userDetails=new HashMap<>();
+        userDetails.put("firstName", "Beno1");
+        userDetails.put("lastName", "Bucko1");
+		
+		Response response = given()
+				 .header("Authorization",authorizationHeader)
+				 .contentType(JSON)
+				 .accept(JSON)
+				 .pathParam("id", userId)
+				 .body(userDetails)
+				 .when()
+				 .put(CONTEXT_PATH + "/users/{id}")
+				 .then()
+				 .statusCode(200)
+				 .contentType(JSON)
+				 .extract()
+				 .response();
+				
+        String firstName = response.jsonPath().getString("firstName");
+        String lastName = response.jsonPath().getString("lastName");
+        List<Map<String, String>>storedAddresses = response.jsonPath().getList("addresses");
+        
+        assertEquals("Beno1", firstName);
+        assertEquals("Bucko1", lastName);
+        assertNotNull(storedAddresses);
+        assertTrue(storedAddresses.size()==2);
+        assertEquals(addresses.get(0).get("streetName"),storedAddresses.get(0).get("streetName"));
+        
+		
+	}
+	
 }
