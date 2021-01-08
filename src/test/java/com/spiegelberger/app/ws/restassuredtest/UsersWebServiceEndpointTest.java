@@ -3,6 +3,7 @@ package com.spiegelberger.app.ws.restassuredtest;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
 import java.util.List;
@@ -64,7 +65,7 @@ class UsersWebServiceEndpointTest {
 	/*
 	 * testGetUserDetails()
 	 */
-/*	@Test
+	@Test
 	final void b() {
 		
 		Response response = given()
@@ -95,13 +96,13 @@ class UsersWebServiceEndpointTest {
 				assertTrue(addresses.size() == 2);
 				assertTrue(addressId.length() == 30);
 	}
-*/
+
 	
 	
 	/*
 	 * test UpdateUser()
 	 */
-/*	@Test
+	@Test
 	final void c() {
 		
 		Map<String, String>userDetails=new HashMap<>();
@@ -135,7 +136,7 @@ class UsersWebServiceEndpointTest {
 		
 	}
 	
-	*/
+	
 	
 	/*
 	 * test DeleteUser()
