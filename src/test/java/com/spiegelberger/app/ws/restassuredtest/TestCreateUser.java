@@ -58,7 +58,7 @@ class TestCreateUser {
 	        userDetails.put("email", "zsoltspiegelberger@gmail.com");
 	        userDetails.put("password", "123");
 	        userDetails.put("addresses", userAddresses);
-		
+	        
 		
 		Response response = given()
 		.contentType("application/json")
