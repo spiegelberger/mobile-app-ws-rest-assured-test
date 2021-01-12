@@ -1,1 +1,1 @@
-This repository contains the REST Assured tests for my mobile-app-ws project (https://github.com/spiegelberger/mobile-app-ws).
+This repository contains REST Assured tests for my mobile-app-ws project.(https://github.com/spiegelberger/mobile-app-ws)
